@@ -1,4 +1,5 @@
 function fetchHexmap(hexmap){
+  require('dotenv').config();
   const owner = 'ManeaRoliste';
   const repo = 'genesys';
   const path = 'hexmap.json';
