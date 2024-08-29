@@ -12,6 +12,9 @@
   </head>
   <body>
     <div id="hexmap-8" class="ex-8">
+      <div class="terrains">Terrains</div>
+      <div class="politique">Politique</div>
+      <div class="exploration">Exploration</div>
     <code>
     </code>
     </div>
@@ -33,9 +36,27 @@
     hexmap.positionHexes().resize();
 
     setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
+
+    fetchHexmap(hexmap);
   });
 
   hexmap.on('click', function(e){
     hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
-  })
+    hexmap.hexes[e.hex.id].explore = 'explored';
+    console.log(hexmap.hexes[e.hex.id]);
+    hexmap.setContent(function(id,hex) {
+      if(hex.explore == 'explored')
+      {
+        str = '';
+      }
+      else
+      {
+        str = '<div class="token">';
+        str += '<div class="explorer">'+'Explorer'+'</div>';
+        str += '</div>';
+      }
+    return str;
+    fetchHexmap(hexmap);
+  });
+});
 </script>
