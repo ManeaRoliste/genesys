@@ -3,7 +3,7 @@ function fetchHexmap(hexmap){
   const repo = 'genesys';
   const path = 'hexmap.json';
   const branch = 'main'; // ou la branche que vous souhaitez modifier
-  const token = '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';
+  const token = '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';
 
   async function updateJSONFile() {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
