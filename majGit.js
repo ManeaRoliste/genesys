@@ -1,9 +1,10 @@
 function fetchHexmap(hexmap){
+  require('dotenv').config();
   const owner = 'ManeaRoliste';
   const repo = 'genesys';
   const path = 'hexmap.json';
   const branch = 'main'; // ou la branche que vous souhaitez modifier
-  const token = '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';
+  const token = process.env.GITHUB_TOKEN;
 
   async function updateJSONFile() {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
