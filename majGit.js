@@ -28,7 +28,7 @@ function fetchHexmap(hexmap){
         let jsonContent = JSON.parse(content);
 
         // Modifier le contenu JSON comme souhaité
-        jsonContent["nouvelle_cle"] = "nouvelle_valeur";
+        jsonContent = hexmap;
 
         // Réencoder le contenu modifié en base64
         const updatedContent = btoa(JSON.stringify(jsonContent, null, 2));
