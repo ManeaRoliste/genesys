@@ -5,6 +5,7 @@ function fetchHexmap(hexmap){
   const path = 'hexmap.json';
   const branch = 'main'; // ou la branche que vous souhaitez modifier
   const token = process.env.GITHUB_TOKEN;
+  console.log('Token:', token);
 
   async function updateJSONFile() {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
