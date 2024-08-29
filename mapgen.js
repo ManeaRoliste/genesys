@@ -604,8 +604,8 @@ function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
 
     // Build the circular token that sits on a hex
     str = '<div class="token">';
-    //str += '<div class="explorer">'+'Explorer'+'</div>';
-    str += '<div class="explorer">'+hex.n+'</div>';
+    str += '<div class="explorer">'+'Explorer'+'</div>';
+    //str += '<div class="explorer">'+hex.n+'</div>';
     //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
     //str += '<div class="terrain">'+hex.type+'</div>';
     //str += '<div class="hauteur">'+hex.elevation+'</div>';

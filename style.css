@@ -20,7 +20,7 @@
   .token .id, .token .odds { font-size: 0.5em; }
   .token .type { font-size: 0.8em; }
   .token .hauteur {font-size: 1em;}
-  .token .explorer {font-size: 2em;}
+  .token .explorer {font-size: 1em;}
   .hills { background-image: url('tiles/hills.png'); background-repeat: no-repeat; background-size: contain; }
   .taigas { background-image: url('tiles/taigas.png'); background-repeat: no-repeat; background-size: contain; }
   .mountains { background-image: url('tiles/mountains.png'); background-repeat: no-repeat; background-size: contain; }
