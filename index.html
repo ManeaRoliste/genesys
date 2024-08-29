@@ -14,7 +14,6 @@
     <div id="hexmap-8" class="ex-8">
     <code>
     </code>
-    <button class="genClass">Générer les caractéristiques</button>
     </div>
   </body>
 </html>
@@ -28,14 +27,15 @@
   let hexMapGenerated = generateHexMap(aleaK, sizeQ, sizeR);
   let placeHexmap = document.querySelector('code');
   placeHexmap.append(hexMapGenerated);
-  function getMap(){
-    let hexmap = S.hexmap('hexmap-8');
-    return hexmap;
-  }
+  let hexmap = S.hexmap('hexmap-8');
+
   S(document).ready(function(){
-    let hexmap = getMap();
     hexmap.positionHexes().resize();
 
     setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
   });
+
+  hexmap.on('click', function(e){
+    hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
+  })
 </script>

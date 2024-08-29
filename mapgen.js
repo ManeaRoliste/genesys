@@ -600,16 +600,12 @@ function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
     hex.temp = temp;
     let t = setTerrain(hex.elevation, hex.humidity, hex.temp);
     hex.terrain = t;
-    hex.setClass(t);
-
-    hex.setClasse(hex.explore);
+    hex.setClass(hex.explore);
 
     // Build the circular token that sits on a hex
     str = '<div class="token">';
-    if(hex.explore === 'secret'){
-      str += '<div class="explore">Explorer</div>';
-    }
-    //str += '<div class="n">'+hex.n+'</div>';
+    //str += '<div class="explorer">'+'Explorer'+'</div>';
+    str += '<div class="explorer">'+hex.n+'</div>';
     //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
     //str += '<div class="terrain">'+hex.type+'</div>';
     //str += '<div class="hauteur">'+hex.elevation+'</div>';
