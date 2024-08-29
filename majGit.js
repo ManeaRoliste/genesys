@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 function fetchHexmap(hexmap){
   const owner = 'ManeaRoliste';
   const repo = 'genesys';
