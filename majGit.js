@@ -37,7 +37,7 @@ function fetchHexmap(hexmap){
         const updateResponse = await fetch(url, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${token}`,
+                'Authorization': `token ${tokenTot}`,
                 'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             },
