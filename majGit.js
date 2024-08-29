@@ -57,3 +57,4 @@ if (data.encoding === 'base64') {
 
   updateJSONFile();
 }
+}
