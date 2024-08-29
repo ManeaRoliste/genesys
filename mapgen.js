@@ -585,6 +585,7 @@ function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
   let windZones = setZonesWind(sizeQ, sizeR);
   let sunZones = setZonesSun(sizeQ, sizeR);
   hexmap.setContent(function(id,hex){
+    hex.explore = 'secret';
     setElevation(hexmap, hex, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
     setZones(hex, sizeR);
     hex.rain = 0;
@@ -601,21 +602,19 @@ function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
     hex.terrain = t;
     hex.setClass(t);
 
-    let classHex = new Hex(hex);
-    console.log(classHex);
+    hex.setClasse(hex.explore);
 
     // Build the circular token that sits on a hex
     str = '<div class="token">';
-    if(hex.n == "Robber"){
-      str += 'Robber '+hex.q+','+hex.r;
-    }else{
-      str += '<div class="n">'+hex.n+'</div>';
-      //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
-      //str += '<div class="terrain">'+hex.type+'</div>';
-      //str += '<div class="hauteur">'+hex.elevation+'</div>';
-      //str += '<div class="hauteur">'+hex.humidity+'</div>';
-      //str += '<div class="hauteur">'+hex.temp+'</div>';
+    if(hex.explore === 'secret'){
+      str += '<div class="explore">Explorer</div>';
     }
+    //str += '<div class="n">'+hex.n+'</div>';
+    //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
+    //str += '<div class="terrain">'+hex.type+'</div>';
+    //str += '<div class="hauteur">'+hex.elevation+'</div>';
+    //str += '<div class="hauteur">'+hex.humidity+'</div>';
+    //str += '<div class="hauteur">'+hex.temp+'</div>';
     str += '</div>';
 
     return str;

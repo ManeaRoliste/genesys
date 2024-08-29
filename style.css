@@ -27,3 +27,4 @@
   .forest { background-image: url('tiles/forest.png'); background-repeat: no-repeat; background-size: contain; }
   .wetland { background-image: url('tiles/wetland.png'); background-repeat: no-repeat; background-size: contain; }
   .savana { background-image: url('tiles/savana.png'); background-repeat: no-repeat; background-size: contain; }
+  .secret { background-color: #000000; background-repeat: no-repeat; background-size: contain; }
