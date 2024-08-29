@@ -1,0 +1,29 @@
+* {
+  margin:0;
+}
+  .ex-8 {
+    background-color: #66bbe2;
+    padding: 2% 2%;
+    margin: auto;
+    /*clip-path: polygon(0% 50%, 25% 100%, 75% 100%, 100% 50%, 75% 0%, 25% 0%);*/
+  }
+  .token {
+    font-family: serif;
+    border-radius: 100%;
+    background-color: wheat;
+    width: 4em;
+    height: 4em;
+    color: black;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .token .id, .token .odds { font-size: 0.5em; }
+  .token .type { font-size: 0.8em; }
+  .token .hauteur {font-size: 1em;}
+  .hills { background-image: url('tiles/hills.png'); background-repeat: no-repeat; background-size: contain; }
+  .taigas { background-image: url('tiles/taigas.png'); background-repeat: no-repeat; background-size: contain; }
+  .mountains { background-image: url('tiles/mountains.png'); background-repeat: no-repeat; background-size: contain; }
+  .fields { background-image: url('tiles/fields.png'); background-repeat: no-repeat; background-size: contain; }
+  .forest { background-image: url('tiles/forest.png'); background-repeat: no-repeat; background-size: contain; }
+  .wetland { background-image: url('tiles/wetland.png'); background-repeat: no-repeat; background-size: contain; }
+  .savana { background-image: url('tiles/savana.png'); background-repeat: no-repeat; background-size: contain; }

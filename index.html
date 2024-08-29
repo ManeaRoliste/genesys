@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script type="text/javascript" src="https://slowe.github.io/stuquery/js/stuquery.js"></script>
+    <script type="text/javascript" src="https://slowe.github.io/stuquery/js/stuquery.hexmap.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="mapgen.js"></script>
+    <script type="text/javascript" src="mapclass.js"></script>
+    <link rel="stylesheet" href="stuquery.hexmap.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="hexmap-8" class="ex-8">
+    <code>
+    </code>
+    <button class="genClass">Générer les caractéristiques</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  let sizeQ = 30;
+  let sizeR = 30;
+  let minAleaK = sizeQ/2-3;
+  let maxAleaK = minAleaK+8;
+  let aleaK = Math.floor(Math.random()*8)+minAleaK;
+  let hexMapGenerated = generateHexMap(aleaK, sizeQ, sizeR);
+  let placeHexmap = document.querySelector('code');
+  placeHexmap.append(hexMapGenerated);
+  function getMap(){
+    let hexmap = S.hexmap('hexmap-8');
+    return hexmap;
+  }
+  S(document).ready(function(){
+    let hexmap = getMap();
+    hexmap.positionHexes().resize();
+
+    setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
+  });
+</script>
