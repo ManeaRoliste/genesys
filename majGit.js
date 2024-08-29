@@ -3,7 +3,7 @@ function fetchHexmap(hexmap){
   const repo = 'genesys';
   const path = 'hexmap.json';
   const branch = 'main'; // ou la branche que vous souhaitez modifier
-  const token = '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';
+  const token = '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';
 
   async function updateJSONFile() {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
@@ -18,19 +18,19 @@ function fetchHexmap(hexmap){
 
     const data = await response.json();
 
-    // Décoder le contenu actuel en base64
-    const content = atob(data.content);
-
-    // Convertir le contenu JSON en un objet
+// Vérifier si le contenu est bien encodé en base64
+if (data.encoding === 'base64') {
+    // Décoder le contenu en base64
+    const content = atob(data.content.replace(/\n/g, '')); // Supprimer les sauts de ligne
     let jsonContent = JSON.parse(content);
 
-    // Modifier le contenu JSON selon vos besoins
-    jsonContent = hexmap;
+    // Modifier le contenu JSON comme souhaité
+    jsonContent["nouvelle_cle"] = "nouvelle_valeur";
 
     // Réencoder le contenu modifié en base64
     const updatedContent = btoa(JSON.stringify(jsonContent, null, 2));
 
-    // Préparer la requête PUT pour mettre à jour le fichier
+    // Mettre à jour le fichier sur GitHub
     const updateResponse = await fetch(url, {
         method: 'PUT',
         headers: {
@@ -51,7 +51,9 @@ function fetchHexmap(hexmap){
     } else {
         console.error('Une erreur est survenue lors de la mise à jour du fichier.');
     }
-  }
+} else {
+    console.error('Le contenu récupéré n\'est pas encodé en base64.');
+}
 
   updateJSONFile();
 }
