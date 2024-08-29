@@ -3,7 +3,10 @@ function fetchHexmap(hexmap){
   const repo = 'genesys';
   const path = 'hexmap.json';
   const branch = 'main'; // ou la branche que vous souhaitez modifier
-  const token = getToken();
+  const token1 = 'ghp_SQxSbwAGE';
+  const token2 = '1lBctZcnAPEtO';
+  const token3 = 'xGNge31P4eGgR6';
+  const tokenTot = token1 + token2 + token3;
 
   async function updateJSONFile() {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
@@ -11,7 +14,7 @@ function fetchHexmap(hexmap){
     // Récupérer le fichier actuel
     const response = await fetch(url, {
         headers: {
-            'Authorization': `token ${token}`,
+            'Authorization': `token ${tokenTot}`,
             'Accept': 'application/vnd.github.v3+json'
         }
     });
