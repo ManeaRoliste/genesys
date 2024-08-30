@@ -1,6 +1,6 @@
 const {google} = require("googleapis");
 const {GoogleAuth} = require("google-auth-library");
-import fs from "fs/promises";
+const {fs} = require("fs/promises");
 
 const credentials = await fs.readFile('credentials.json', 'utf-8');
 
