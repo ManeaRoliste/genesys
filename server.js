@@ -1,6 +1,6 @@
-import {google} "googleapis";
-import {GoogleAuth} = "google-auth-library";
-import {fs} = "fs/promises";
+import {google} from "googleapis";
+import {GoogleAuth} from "google-auth-library";
+import {fs} from "fs/promises";
 
 async function editHexmap(hexmap){
   const credentials = await fs.readFile('credentials.json', 'utf-8');
