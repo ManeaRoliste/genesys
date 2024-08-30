@@ -1,25 +1,44 @@
-import {google} from "/genesys/node_modules/googleapis";
-import {GoogleAuth} from "/genesys/node_modules/google-auth-library";
-import {fs} from "/genesys/fs/promises";
+<script src="https://apis.google.com/js/api.js"></script>
+    // Client-side script to handle Google Sheets API
+    let CLIENT_ID = '118215344916755926624';
+    let API_KEY = 'dcae814defa5e6556ac155afb672e8de6a8c3fc4';
+    let DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+    let SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
-async function editHexmap(hexmap){
-  const credentials = await fs.readFile('credentials.json', 'utf-8');
+    function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+    }
 
-  let credentials_parsed = JSON.parse(credentials);
+    function initClient() {
+        gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(() => {
+            document.getElementById('authorize_button').onclick = handleAuthClick;
+            document.getElementById('signout_button').onclick = handleSignoutClick;
+        });
+    }
 
-  const auth = new GoogleAuth({
-    credentials_parsed,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
+    function handleAuthClick() {
+        gapi.auth2.getAuthInstance().signIn();
+    }
 
-  const authClient = auth.fromJSON(credentials_parsed);
+    function handleSignoutClick() {
+        gapi.auth2.getAuthInstance().signOut();
+    }
 
-  const sheets = google.sheets({ version: 'v4', auth: authClient });
-
-  sheets.spreadsheets.values.update({
-    spreadsheetId:"1Spq-Xf83L65rQlLtYvNQO22BevyMSqjeRr-r6IRvn_o",
-    range:"Feuille 1!A1",
-    valueInputOption: "RAW",
-    resource:{values:[[JSON.stringify(hexmap)]]}
-  });
-}
+    function updateSheet() {
+        gapi.client.sheets.spreadsheets.values.update({
+            spreadsheetId: '1Spq-Xf83L65rQlLtYvNQO22BevyMSqjeRr-r6IRvn_o',
+            range: 'Feuille 1!A1',
+            valueInputOption: 'RAW',
+            resource: { values: [[ "Hello, World!" ]] }
+        }).then(response => {
+            console.log('Sheet updated', response);
+        }, error => {
+            console.error('Error updating sheet', error);
+        });
+    }
+<script async defer onload="handleClientLoad()" src="https://apis.google.com/js/api.js"></script>
