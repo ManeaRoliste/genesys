@@ -15,9 +15,11 @@ const authClient = auth.fromJSON(credentials_parsed);
 
 const sheets = google.sheets({ version: 'v4', auth: authClient });
 
-sheets.spreadsheets.values.update({
-  spreadsheetId:"1Spq-Xf83L65rQlLtYvNQO22BevyMSqjeRr-r6IRvn_o",
-  range:"Feuille 1!A1",
-  valueInputOption: "RAW",
-  resource:{values:[["Hello world"]]}
-});
+function editHexmap(hexmap){
+  sheets.spreadsheets.values.update({
+    spreadsheetId:"1Spq-Xf83L65rQlLtYvNQO22BevyMSqjeRr-r6IRvn_o",
+    range:"Feuille 1!A1",
+    valueInputOption: "RAW",
+    resource:{values:[["Hello world"]]}
+  });
+}
