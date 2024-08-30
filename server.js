@@ -1,6 +1,6 @@
-import {google} from "/node_modules/googleapis";
-import {GoogleAuth} from "/node_modules/google-auth-library";
-import {fs} from "/fs/promises";
+import {google} from "/genesys/node_modules/googleapis";
+import {GoogleAuth} from "/genesys/node_modules/google-auth-library";
+import {fs} from "/genesys/fs/promises";
 
 async function editHexmap(hexmap){
   const credentials = await fs.readFile('credentials.json', 'utf-8');
