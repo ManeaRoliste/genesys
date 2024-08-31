@@ -1,4 +1,4 @@
-function editHexmap(){
+function editHexmap(hexmap){
     // Client-side script to handle Google Sheets API
     let CLIENT_ID = '118215344916755926624';
     let API_KEY = 'dcae814defa5e6556ac155afb672e8de6a8c3fc4';
