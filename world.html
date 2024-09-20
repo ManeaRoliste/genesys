@@ -17,6 +17,7 @@
       <div class="politique">Politique</div>
       <div class="exploration">Exploration</div>
       <a href="civilisations.php"><div class="civilisations">Civilisations</div></a>
+      <div class="update">Mise à jour</div>
     <code>
     </code>
     </div>
@@ -45,8 +46,8 @@ $.getJSON("hexmap.json", function(json) {
     let mode = 'terrains';
     let items;
 
-    function save_to_local_json() {
-      let items_json = JSON.stringify(items);
+    function save_to_local_json(item) {
+      let items_json = JSON.stringify(item);
       localStorage.setItem('hexmap', items_json);
     };
 
@@ -107,10 +108,12 @@ $.getJSON("hexmap.json", function(json) {
       if(mode == 'exploration' && hexmap.hexes[e.hex.id].explore == 'secret'){
         hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
         hexmap.hexes[e.hex.id].explore = 'explored';
-        items.push(hexmap);
-        save_to_local_json();
       }
     });
+
+    S('.update').on('click', function(){
+      save_to_local_json(hexmap);
+    })
   });
 });
 </script>
