@@ -1,142 +1,163 @@
+function numIsPair(n) {
+  return (n & 1) ? false : true;
+}
+
+function checkWater(a) {
+  let bool = false;
+  a.forEach(function(hexType){
+    if(hexType == 'water'){
+      bool = true;
+    }
+  });
+  return bool;
+}
+
 function generateContinents(hexmap, aleaK, sizeQ, sizeR){
-  let countHex = 0;
-  let i = 0;
   let n = 0;
     for(j = 0 ; j < sizeR ; j++){
-      for(k = 0 ; k < aleaK ; k++){
+      for(k = 0 ; k < sizeQ ; k++){
         if(j <= 3){
-          if(Math.floor(Math.random()*4) > 1){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-            countHex++;
-            i++;
+          if(Math.floor(Math.random()*100)+1 > 75){
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
+          }
+          else{
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+            n++;
           }
         }
         else if(j >= (sizeR-3)){
-          if(Math.floor(Math.random()*4) > 1){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-            countHex++;
-            i++;
+          if(Math.floor(Math.random()*100)+1 > 75){
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
+          }
+          else{
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+            n++;
           }
         }
         else{
-          if(k <= 2){
-            if(Math.floor(Math.random()*4) > 1){
-              hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-              countHex++;
-              i++;
+          if(k <= 2 || k >= (sizeQ-2)){
+            if(Math.floor(Math.random()*100)+1 > 75){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
             }
           }
           else if(k >= 3 && k < aleaK-3){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-            countHex++;
-            i++
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
           }
-          else if(k >= aleaK-3 && k < aleaK-1){
-            if(Math.floor(Math.random()*4) > 1){
-              if(countHex > 10){
-                let testSeparation = Math.floor(Math.random()*10)+1;
-                if(testSeparation === 10){
-                  countHex = 0;
-                }
-                else{
-                  hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-                  countHex++;
-                  i++;
-                }
-              }
+          else if(k >= aleaK-3 && k <= aleaK+3){
+            if(Math.floor(Math.random()*100)+1 > 75){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
             }
-          }
-          else if(k == aleaK || k == aleaK-1){
-            if(Math.floor(Math.random()*3) > 1){
-              if(countHex > 5){
-                let testSeparation = Math.floor(Math.random()*10)+1;
-                if(testSeparation === 10){
-                  countHex = 0;
-                }
-                else{
-                  hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-                  countHex++;
-                  i++;
-                }
-              }
-              else{
-                hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-                countHex++;
-                i++;
-              }
-            }
-          }
-        }
-        n++;
-      }
-    }
-
-    for(j = 0 ; j < sizeR ; j++){
-      for(k = aleaK+1 ; k < sizeQ ; k++){
-        if(j <= 3){
-          if(Math.floor(Math.random()*4) > 1){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-            countHex++;
-            i++;
-          }
-        }
-        else if(j >= (sizeR-3)){
-          if(Math.floor(Math.random()*4) > 1){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:''};
-            countHex++;
-            i++;
-          }
-        }
-        else{
-          if(k == aleaK+1){
-            if(Math.floor(Math.random()*3) > 1){
-              if(countHex > 5){
-                let testSeparation = Math.floor(Math.random()*10)+1;
-                if(testSeparation === 10){
-                  countHex = 0;
-                }
-                else{
-                  hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:""};
-                  countHex++;
-                  i++;
-                }
-              }
-              else{
-                hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:""};
-                countHex++;
-                i++;
-              }
-            }
-          }
-          else if(k > aleaK+1 && k <= aleaK+3){
-            if(Math.floor(Math.random()*4) > 1){
-              if(countHex > 10){
-                let testSeparation = Math.floor(Math.random()*10)+1;
-                if(testSeparation === 10){
-                  countHex = 0;
-                }
-                else{
-                  hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:""};
-                  countHex++;
-                  i++;
-                }
-              }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
             }
           }
           else if(k > aleaK+3 && k < (sizeQ-2)){
-            hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:""};
-            countHex++;
-            i++;
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:"land"};
+            n++;
           }
-          else if(k >= (sizeQ-2)){
-            if(Math.floor(Math.random()*4) > 1){
-              hexmap.hexes[i] = {i:i,n:n,q:k,r:j,type:""};
-              countHex++;
-              i++;
+        }
+      }
+    }
+
+  return hexmap;
+}
+
+function generateWorld(hexmap, aleaK, sizeQ, sizeR, aleaJ){
+  let n = 0;
+    for(j = 0 ; j < sizeR ; j++){
+      for(k = 0 ; k < sizeQ ; k++){
+        if(j < aleaJ && k >= aleaK-5 && k <= aleaK+5){
+          if(Math.floor(Math.random()*100)+1 > 70){
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
+          }
+          else{
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+            n++;
+          }
+        }
+        else if(j > (sizeR-4)){
+          if(Math.floor(Math.random()*100)+1 > 75){
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
+          }
+          else{
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+            n++;
+          }
+        }
+        else if(j < aleaJ){
+          if(Math.floor(Math.random()*100)+1 > 90){
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+            n++;
+          }
+          else{
+            hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+            n++;
+          }
+        }
+        else{
+          if(k <= 3 || k >= (sizeQ-3)){
+            if(Math.floor(Math.random()*100)+1 > 75){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
+            }
+          }
+          else if(k >= 4 && k < aleaK-2){
+            if(Math.floor(Math.random()*100)+1 > 8){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
+            }
+          }
+          else if(k >= aleaK-4 && k <= aleaK+4 && j > aleaJ+4 && j < (sizeR-8)){
+            if(Math.floor(Math.random()*100)+1 > 90){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
+            }
+          }
+          else if(k >= aleaK-2 && k <= aleaK+2){
+            if(Math.floor(Math.random()*100)+1 > 45){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
+            }
+          }
+          else if(k > aleaK+2 && k < (sizeQ-3)){
+            if(Math.floor(Math.random()*100)+1 > 5){
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'land'};
+              n++;
+            }
+            else{
+              hexmap.hexes[n] = {n:n,q:k,r:j,type:'water'};
+              n++;
             }
           }
         }
-        n++;
       }
     }
 
@@ -172,90 +193,82 @@ function generateArchipelago(hexmap){
   return hexmap;
 }
 
-function generateHexMap(aleaK, sizeQ, sizeR) {
+function generateHexMap(aleaK, sizeQ, sizeR, aleaJ) {
   let hexmap = {layout:"odd-r",hexes:{}};
-  hexmap = generateContinents(hexmap, aleaK, sizeQ, sizeR);
+  hexmap = generateWorld(hexmap, aleaK, sizeQ, sizeR, aleaJ);
 
   return JSON.stringify(hexmap);
 }
 
-function setElevation(hexmap, hex, aleaK, sizeQ, sizeR, minAleaK, maxAleaK){
-
-  //Analyser par ligne et colonne pour vérifier la présence de mer
+function setElevation(hexmap, hex, sizeQ, sizeR){
 
   let elevation = 0;
-  let hexL = hex.n-1;
-  let checkHexL = 0;
-  let hexR = hex.n+1;
-  let checkHexR = 0;
-  let hexU = hex.n+11;
-  let checkHexU = 0;
-  let hexD = hex.n-11;
-  let checkHexD = 0;
+  let arrayHex = [];
 
-  for(i = 0 ; i < hexmap.hexes.length ; i++){
-    if(hexmap.hexes[i].n == hexL){
-      checkHexL=1;
-    }
-    if(hexmap.hexes[i].n == hexR){
-      checkHexR=1;
-    }
-    if(hexmap.hexes[i].n == hexU){
-      checkHexU=1;
-    }
-    if(hexmap.hexes[i].n == hexD){
-      checkHexD=1;
-    }
-  }
-
-  if(hex.q == 0){
-    elevation = Math.floor(Math.random()*50);
-  }
-  else if(hex.q == sizeQ){
-    elevation=Math.floor(Math.random()*50);
-  }
-  else if(hex.r == 0){
-    elevation = Math.floor(Math.random()*50);
-  }
-  else if(hex.r == sizeR){
-    elevation=Math.floor(Math.random()*50);
-  }
-  else if(checkHexL == 0){
-    elevation=Math.floor(Math.random()*50);
-  }
-  else if(checkHexR == 0){
-    elevation=Math.floor(Math.random()*50);
-  }
-  else if(checkHexU == 0){
-    elevation=Math.floor(Math.random()*50);
-  }
-  else if(checkHexD == 0){
-    elevation=Math.floor(Math.random()*50);
+  if(numIsPair(hex.r)){
+    let hexL = hex.q > 0 ? hexmap.hexes[hex.n-1].type : 'water';
+    let hexR = hex.q < (sizeQ-1) ? hexmap.hexes[hex.n+1].type : 'water';
+    let hexUL = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ-1)].type : 'water';
+    let hexDL = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ+1)].type : 'water';
+    let hexUR = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ)].type : 'water';
+    let hexDR = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ)].type : 'water';
+    arrayHex.push(hexL, hexR, hexUL, hexDL, hexUR, hexDR);
   }
   else{
-    let bonus = 50;
-    if(hex.r < (sizeR/2)){
-      bonus+= (hex.r)*10;
+    let hexL = hex.q > 0 ? hexmap.hexes[hex.n-1].type : 'water';
+    let hexR = hex.q < (sizeQ-1) ? hexmap.hexes[hex.n+1].type : 'water';
+    let hexUL = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ)].type : 'water';
+    let hexDL = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ)].type : 'water';
+    let hexUR = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ+1)].type : 'water';
+    let hexDR = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ-1)].type : 'water';
+    arrayHex.push(hexL, hexR, hexUL, hexDL, hexUR, hexDR);
+  }
+
+  if(checkWater(arrayHex)){
+    elevation=Math.floor(Math.random()*120)+30;
+  }
+  else{
+    let dist = 0;
+    let distR = 0;
+    let distL = 0;
+    let distU = 0;
+    let distD = 0;
+    for(i = 0 ; i < (sizeQ - hex.q) ; i++){
+      if(hexmap.hexes[hex.n+i] && hexmap.hexes[hex.n+i].type != 'water'){
+        distR++;
+      }
+      else{
+        i = sizeQ-hex.q;
+      }
     }
-    else{
-      bonus+=(14-hex.r)*10;
+    for(i = 0 ; i < hex.q ; i++){
+      if(hexmap.hexes[hex.n-i] && hexmap.hexes[hex.n-i].type != 'water'){
+        distL++;
+      }
+      else{
+        i = hex.q;
+      }
     }
-    if(hex.q < (aleaK-1)){
-      bonus+=(hex.q)*10;
+    for(i = 0 ; i < (sizeR - hex.r) ; i++){
+      if(hexmap.hexes[hex.n+(i*sizeQ)] && hexmap.hexes[hex.n+(i*sizeQ)].type != 'water'){
+        distU++;
+      }
+      else{
+        i = sizeR-hex.r;
+      }
     }
-    else if(hex.q > (aleaK+1)){
-      bonus+=(19-hex.q)*10;
+    for(i = 0 ; i < hex.r ; i++){
+      if(hexmap.hexes[hex.n-(i*sizeQ)] && hexmap.hexes[hex.n-(i*sizeQ)].type != 'water'){
+        distD++;
+      }
+      else{
+        i = hex.r;
+      }
     }
-    if(hex.r > 5 && hex.r < (sizeR-5)){
-      bonus+=100;
-    }
-    if(hex.q > (aleaK-(minAleaK-1)) && hex.q < (aleaK-3)){
-      bonus+=100;
-    }
-    if(hex.q > (aleaK+3) && hex.q < (aleaK+(sizeQ-maxAleaK))){
-      bonus+=100;
-    }
-    elevation = bonus+(Math.floor(Math.random()*bonus)*4);
+    let bonus = Math.min(distR, distL, distU, distD);
+    bonus = bonus*150;
+    elevationBorn = bonus;
+    elevation = Math.floor(Math.random()*bonus)+elevationBorn;
   }
 
   hex.elevation = elevation;
@@ -265,19 +278,19 @@ function setElevation(hexmap, hex, aleaK, sizeQ, sizeR, minAleaK, maxAleaK){
 
 function setZones(hex, sizeR){
   let zone = '';
-  if(hex.r > (sizeR-5)){
+  if(hex.r > (sizeR-7)){
     zone = 'north';
   }
-  else if(hex.r < 5){
+  else if(hex.r < 7){
     zone = 'south';
   }
   else if(hex.r >= (sizeR/2-2) && hex.r <= (sizeR/2+2)){
     zone = 'equador';
   }
-  else if(hex.r > (sizeR/2+5) && hex.r <= (sizeR-5)){
+  else if(hex.r > (sizeR/2+2) && hex.r <= (sizeR-7)){
     zone = 'midnorth';
   }
-  else if(hex.r >= 5 && hex.r < (sizeR/2-5)){
+  else if(hex.r >= 7 && hex.r < (sizeR/2-2)){
     zone = 'midsouth';
   }
 
@@ -286,210 +299,228 @@ function setZones(hex, sizeR){
   return hex;
 }
 
-function setZonesRain(sizeQ, sizeR){
-  let numZoneRainUp = Math.floor(Math.random()*4);
-  let numZoneRainDown = Math.floor(Math.random()*4);
-  let bornLeftStrong = [];
-  let bornRightStrong = [];
-  let bornUpStrong = [];
-  let bornDownStrong = [];
-  let bornLeftBreak = [];
-  let bornRightBreak = [];
-  let bornUpBreak = [];
-  let bornDownBreak = [];
-  let up = [];
-  let down = [];
-  for(i = 0; i < numZoneRainUp ; i++){
-    bornLeftStrong.push(Math.floor(Math.random()*sizeQ));
-    bornRightStrong.push(Math.floor(Math.random()*sizeQ)+bornLeftStrong[i]);
-    bornDownStrong.push(Math.floor(Math.random()*sizeR));
-    bornUpStrong.push(Math.floor(Math.random()*sizeR)+bornDownStrong[i]);
-    up.push(bornLeftStrong, bornRightStrong, bornDownStrong, bornUpStrong);
-  }
-  for(j = 0; j < numZoneRainDown ; j++){
-    bornLeftBreak.push(Math.floor(Math.random()*sizeQ));
-    bornRightBreak.push(Math.floor(Math.random()*sizeR)+bornLeftBreak[j]);
-    bornDownBreak.push(Math.floor(Math.random()*sizeQ));
-    bornUpBreak.push(Math.floor(Math.random()*sizeR)+bornDownBreak[j]);
-    down.push(bornLeftBreak, bornRightBreak, bornDownBreak, bornUpBreak);
+function setZonesRain(hexmap, sizeQ, sizeR){
+  let numZones = Math.floor(Math.random()*4);
+  let zones;
+  for(i = 0 ; i < numZones ; i++){
+    let firstHex = hexmap.hexes[Math.floor(Math.random()*hexmap.hexes.length)];
+    let zone = [firstHex];
+    for(j = 0 ; j < Math.floor(Math.random()*8) ; j++){
+      let dir = Math.floor(Math.random()*j/2);
+      let originalValue = [1, 1, sizeQ, sizeQ];
+      let value = [1, 1, sizeQ, sizeQ];
+      if(dir == 0 || dir == 2){
+        zone.push(hexmap.hexes[firstHex.n+value[dir]]);
+        value[0] += originalValue[0];
+        value[2] += originalValue[2];
+      }
+      if(dir == 1 || dir == 3){
+        zone.push(hexmap.hexes[firstHex.n-value[dir]]);
+        value[1] += originalValue[1];
+        value[3] += originalValue[3];
+      }
+    }
   }
 
-  let r = [up, down];
-  return r;
+  return zones;
 }
 
-function setRain(hex, rainZones){
-  let up = rainZones[0];
-  let bornLeftStrong = up[0];
-  let bornRightStrong = up[1];
-  let bornDownStrong = up[2];
-  let bornUpStrong = up[3];
-  if(bornLeftStrong){
-    for(i = 0 ; i < bornLeftStrong.length ; i++){
-      if(hex.q > bornLeftStrong[i] && hex.q < bornRightStrong[i] && hex.r < bornUpStrong[i] && hex.r > bornDownStrong[i]){
-        hex.rain += Math.floor(Math.random()*30)+70;
-      }
-    }
-  }
-  let down = rainZones[1];
-  let bornLeftBreak = down[0];
-  let bornRightBreak = down[1];
-  let bornDownBreak = down[2];
-  let bornUpBreak = down[3];
-  if(bornLeftBreak){
-    for(k = 0 ; k < bornLeftBreak.length ; k++){
-      if(hex.q > bornLeftBreak[k] && hex.q < bornRightBreak[k] && hex.r < bornUpBreak[k] && hex.r > bornDownBreak[k]){
-        hex.rain += Math.floor(Math.random()*30);
-      }
-    }
+function setRain(hexmap, sizeQ, hex, rainZones){
+  if(!hex.rain){
+    hex.rain = 0;
   }
   if(hex.rain == 0){
-    hex.rain = Math.floor(Math.random()*30)+30;
-  }
-
-  return hex;
-}
-
-function setZonesWind(sizeQ, sizeR){
-  let numZoneWindUp = Math.floor(Math.random()*4);
-  let numZoneWindDown = Math.floor(Math.random()*4);
-  let bornLeftStrong = [];
-  let bornRightStrong = [];
-  let bornUpStrong = [];
-  let bornDownStrong = [];
-  let bornLeftBreak = [];
-  let bornRightBreak = [];
-  let bornUpBreak = [];
-  let bornDownBreak = [];
-  let up = [];
-  let down = [];
-  for(i = 0; i < numZoneWindUp ; i++){
-    bornLeftStrong.push(Math.floor(Math.random()*sizeQ));
-    bornRightStrong.push(Math.floor(Math.random()*sizeQ)+bornLeftStrong[i]);
-    bornDownStrong.push(Math.floor(Math.random()*sizeR));
-    bornUpStrong.push(Math.floor(Math.random()*sizeR)+bornDownStrong[i]);
-    up.push(bornLeftStrong, bornRightStrong, bornDownStrong, bornUpStrong);
-  }
-  for(j = 0; j < numZoneWindDown ; j++){
-    bornLeftBreak.push(Math.floor(Math.random()*sizeQ));
-    bornRightBreak.push(Math.floor(Math.random()*sizeR)+bornLeftBreak[j]);
-    bornDownBreak.push(Math.floor(Math.random()*sizeQ));
-    bornUpBreak.push(Math.floor(Math.random()*sizeR)+bornDownBreak[j]);
-    down.push(bornLeftBreak, bornRightBreak, bornDownBreak, bornUpBreak);
-  }
-  let r = [up, down];
-  return r;
-}
-
-function setWind(hex, windZones){
-  let up = windZones[0];
-  let bornLeftStrong = up[0];
-  let bornRightStrong = up[1];
-  let bornDownStrong = up[2];
-  let bornUpStrong = up[3];
-  if(bornLeftStrong){
-    for(i = 0 ; i < bornLeftStrong.length ; i++){
-      if(hex.q > bornLeftStrong[i] && hex.q < bornRightStrong[i] && hex.r < bornUpStrong[i] && hex.r > bornDownStrong[i]){
-        hex.wind += Math.floor(Math.random()*30)+70;
+    if(hex.zone == 'midnorth' || hex.zone == 'north' || hex.zone == 'south'){
+      hex.rain = Math.floor(Math.random()*2000)+1;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].rain){
+            hexmap.hexes[hex.n+i].rain = hex.rain;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)].rain){
+            hexmap.hexes[hex.n+(sizeQ*i)].rain = hex.rain;
+          }
+        }
+      }
+    }
+    else if(hex.zone == 'equador' || hex.zone == 'midsouth'){
+      hex.rain = Math.floor(Math.random()*7000)+2000;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].rain){
+            hexmap.hexes[hex.n+i].rain = hex.rain;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)].rain){
+            hexmap.hexes[hex.n+(sizeQ*i)].rain = hex.rain;
+          }
+        }
       }
     }
   }
-  let down = windZones[1];
-  let bornLeftBreak = down[0];
-  let bornRightBreak = down[1];
-  let bornDownBreak = down[2];
-  let bornUpBreak = down[3];
-  if(bornLeftBreak){
-    for(k = 0 ; k < bornLeftBreak.length ; k++){
-      if(hex.q > bornLeftBreak[k] && hex.q < bornRightBreak[k] && hex.r < bornUpBreak[k] && hex.r > bornDownBreak[k]){
-        hex.wind += Math.floor(Math.random()*30);
+
+  for(i = 0 ; i < rainZones ; i++){
+    if(hex.n == rainZones[i].n){
+      hex.rain += Math.floor(Math.random()*200)+900;
+    }
+  }
+}
+
+function setZonesWind(hexmap, sizeQ, sizeR){
+  let numZones = Math.floor(Math.random()*4);
+  let zones;
+  for(i = 0 ; i < numZones ; i++){
+    let firstHex = hexmap.hexes[Math.floor(Math.random()*hexmap.hexes.length)];
+    let zone = [firstHex];
+    for(j = 0 ; j < Math.floor(Math.random()*8) ; j++){
+      let dir = Math.floor(Math.random()*j/2);
+      let originalValue = [1, 1, sizeQ, sizeQ];
+      let value = [1, 1, sizeQ, sizeQ];
+      if(dir == 0 || dir == 2){
+        zone.push(hexmap.hexes[firstHex.n+value[dir]]);
+        value[0] += originalValue[0];
+        value[2] += originalValue[2];
+      }
+      if(dir == 1 || dir == 3){
+        zone.push(hexmap.hexes[firstHex.n-value[dir]]);
+        value[1] += originalValue[1];
+        value[3] += originalValue[3];
       }
     }
+  }
+
+  return zones;
+}
+
+function setWind(hexmap, sizeQ, hex, windZones){
+  if(!hex.wind){
+    hex.wind = 0;
   }
   if(hex.wind == 0){
-    hex.wind = Math.floor(Math.random()*30)+30;
+      hex.wind = Math.floor(Math.random()*100)+20;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].wind){
+            hexmap.hexes[hex.n+i].wind = hex.wind;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)].wind){
+            hexmap.hexes[hex.n+(sizeQ*i)].wind = hex.wind;
+          }
+        }
+      }
   }
 
-  return hex;
+  for(i = 0 ; i < windZones ; i++){
+    if(hex.n == windZones[i].n){
+      hex.wind += Math.floor(Math.random()*20)+10;
+    }
+  }
 }
 
-function setZonesSun(sizeQ, sizeR){
-  let numZoneSunUp = Math.floor(Math.random()*4);
-  let numZoneSunDown = Math.floor(Math.random()*4);
-  let bornLeftStrong = [];
-  let bornRightStrong = [];
-  let bornUpStrong = [];
-  let bornDownStrong = [];
-  let bornLeftBreak = [];
-  let bornRightBreak = [];
-  let bornUpBreak = [];
-  let bornDownBreak = [];
-  let up = [];
-  let down = [];
-  for(i = 0; i < numZoneSunUp ; i++){
-    bornLeftStrong.push(Math.floor(Math.random()*sizeQ));
-    bornRightStrong.push(Math.floor(Math.random()*sizeQ)+bornLeftStrong[i]);
-    bornDownStrong.push(Math.floor(Math.random()*sizeR));
-    bornUpStrong.push(Math.floor(Math.random()*sizeR)+bornDownStrong[i]);
-    up.push(bornLeftStrong, bornRightStrong, bornDownStrong, bornUpStrong);
-  }
-  for(j = 0; j < numZoneSunDown ; j++){
-    bornLeftBreak.push(Math.floor(Math.random()*sizeQ));
-    bornRightBreak.push(Math.floor(Math.random()*sizeR)+bornLeftBreak[j]);
-    bornDownBreak.push(Math.floor(Math.random()*sizeQ));
-    bornUpBreak.push(Math.floor(Math.random()*sizeR)+bornDownBreak[j]);
-    down.push(bornLeftBreak, bornRightBreak, bornDownBreak, bornUpBreak);
-  }
-  let r = [up, down];
-  return r;
-}
-
-function setSun(hex, sunZones){
-  let up = sunZones[0];
-  let bornLeftStrong = up[0];
-  let bornRightStrong = up[1];
-  let bornDownStrong = up[2];
-  let bornUpStrong = up[3];
-  if(bornLeftStrong){
-    for(i = 0 ; i < bornLeftStrong.length ; i++){
-      if(hex.q > bornLeftStrong[i] && hex.q < bornRightStrong[i] && hex.r < bornUpStrong[i] && hex.r > bornDownStrong[i]){
-        hex.sun += Math.floor(Math.random()*30)+70;
+function setZonesSun(hexmap, sizeQ, sizeR){
+  let numZones = Math.floor(Math.random()*4);
+  let zones;
+  for(i = 0 ; i < numZones ; i++){
+    let firstHex = hexmap.hexes[Math.floor(Math.random()*hexmap.hexes.length)];
+    let zone = [firstHex];
+    for(j = 0 ; j < Math.floor(Math.random()*8) ; j++){
+      let dir = Math.floor(Math.random()*j/2);
+      let originalValue = [1, 1, sizeQ, sizeQ];
+      let value = [1, 1, sizeQ, sizeQ];
+      if(dir == 0 || dir == 2){
+        zone.push(hexmap.hexes[firstHex.n+value[dir]]);
+        value[0] += originalValue[0];
+        value[2] += originalValue[2];
+      }
+      if(dir == 1 || dir == 3){
+        zone.push(hexmap.hexes[firstHex.n-value[dir]]);
+        value[1] += originalValue[1];
+        value[3] += originalValue[3];
       }
     }
   }
-  let down = sunZones[1];
-  let bornLeftBreak = down[0];
-  let bornRightBreak = down[1];
-  let bornDownBreak = down[2];
-  let bornUpBreak = down[3];
-  if(bornLeftBreak){
-    for(k = 0 ; k < bornLeftBreak.length ; k++){
-      if(hex.q > bornLeftBreak[k] && hex.q < bornRightBreak[k] && hex.r < bornUpBreak[k] && hex.r > bornDownBreak[k]){
-        hex.sun += Math.floor(Math.random()*30);
-      }
-    }
+
+  return zones;
+}
+
+function setSun(hexmap, sizeQ, hex, sunZones){
+  if(!hex.sun){
+    hex.sun = 0;
   }
   if(hex.sun == 0){
-    hex.sun = Math.floor(Math.random()*30)+30;
+    if(hex.zone == 'north'){
+      hex.sun = Math.floor(Math.random()*50)+50;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].sun){
+            hexmap.hexes[hex.n+i].sun = hex.sun;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)]){
+            hexmap.hexes[hex.n+(sizeQ*i)].sun = hex.sun;
+          }
+        }
+      }
+    }
+    if(hex.zone == 'midnorth' || hex.zone == 'midsouth' || hex.zone == 'south'){
+      hex.sun = Math.floor(Math.random()*100)+100;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].sun){
+            hexmap.hexes[hex.n+i].sun = hex.sun;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)]){
+            hexmap.hexes[hex.n+(sizeQ*i)].sun = hex.sun;
+          }
+        }
+      }
+    }
+    if(hex.zone == 'equador'){
+      hex.sun = Math.floor(Math.random()*100)+200;
+      for(i = 0 ; i < Math.floor(Math.random()*7)+8 ; i++){
+        if(hexmap.hexes[hex.n+i]){
+          if(!hexmap.hexes[hex.n+i].sun){
+            hexmap.hexes[hex.n+i].sun = hex.sun;
+          }
+        }
+        if(hexmap.hexes[hex.n+(sizeQ*i)]){
+          if(!hexmap.hexes[hex.n+(sizeQ*i)]){
+            hexmap.hexes[hex.n+(sizeQ*i)].sun = hex.sun;
+          }
+        }
+      }
+    }
   }
 
-  return hex;
+  for(i = 0 ; i < sunZones ; i++){
+    if(hex.n == sunZones[i].n){
+      hex.sun += Math.floor(Math.random()*20)+10;
+    }
+  }
 }
 
 function setHumidity(wind, rain, sun, zone, elevation) {
-  let h = (wind/2)+(sun)-rain+(elevation/100);
+  let h = 100-(sun/7)-(wind/30)+(rain/200)-(elevation/50);
   switch(zone){
     case 'south':
-      h += 10;
-      break;
-    case 'midsouth':
-      h -= 5;
-      break;
-    case 'equador':
       h -= 10;
       break;
-    case 'midnorth':
+    case 'midsouth':
       h += 5;
+      break;
+    case 'equador':
+      h += 20;
+      break;
+    case 'midnorth':
+      h += 0;
       break;
     case 'north':
       h += 10;
@@ -501,23 +532,23 @@ function setHumidity(wind, rain, sun, zone, elevation) {
   return Math.floor(h);
 }
 
-function setTemperature(elevation, humidity, zone){
-  let t = 10+(elevation/100*(-1));
+function setTemperature(elevation, humidity, zone, wind, sun, rain){
+  let t = 12-(elevation/500)-(rain/500)+(sun/30)-(wind/30);
   switch(zone){
     case 'equador':
-      t += 15;
+      t += 12;
       break;
     case 'midsouth':
       t += 5;
       break;
     case 'south':
-      t -= 5;
+      t -= 6;
       break;
     case 'midnorth':
-      t -= 0;
+      t += 2;
       break;
     case 'north':
-      t -= 20;
+      t -= 12;
       break;
     default:
       t += 5;
@@ -528,91 +559,264 @@ function setTemperature(elevation, humidity, zone){
 
 function setTerrain(elevation, humidity, temperature, zone){
   let t;
-  if(elevation > 1200){
+  if(elevation > 1100){
     t = 'mountains';
   }
-  else if(elevation < 1201 && elevation > 800){
-    if(humidity > 0){
+  else if(elevation < 1101 && elevation > 800){
+    if(humidity < 100){
       t = 'hills';
     }
     else{
       t = 'forest';
     }
   }
-  else if(elevation < 801 && elevation > 100){
-    if(humidity < 5){
-      t = 'forest';
-    }
-    else if(humidity > 20 && zone == 'north'){
-      t = 'taigas';
-    }
-    else if(humidity > 20 && temperature > 16){
-      t = 'savana';
-    }
-    else if(humidity > 20 && temperature < 4){
-      t = 'taigas';
-    }
-    else{
-      t = 'fields';
-    }
-  }
   else{
-    if(humidity < -15){
-      t = 'wetland';
+    if(zone == 'north'){
+      if(temperature < 0){
+        t = 'taigas';
+      }
+      else if(humidity > 90){
+        t = 'forest';
+      }
+      else{
+        t = 'fields';
+      }
     }
-    else if(humidity > -21 && humidity < 5){
-      t = 'forest';
+    else if(zone == 'midnorth'){
+      if(humidity > 80 && temperature > 18){
+        t = 'wetland';
+      }
+      else if(humidity < 60 && temperature > 15){
+        t = 'savana';
+      }
+      else if(humidity < 80 && temperature < 0){
+        t = 'taigas';
+      }
+      else if(humidity > 70 && temperature > 10){
+        t = 'forest';
+      }
+      else{
+        t = 'fields';
+      }
     }
-    else if(humidity > 20 && zone == 'north'){
-      t = 'taigas';
+    else if(zone == 'equador'){
+      if(humidity > 120){
+        t = 'wetland';
+      }
+      else if(humidity < 100 || temperature > 16){
+        t = 'savana';
+      }
+      else if(humidity > 70 && temperature > 14){
+        t = 'forest';
+      }
+      else{
+        t = 'fields';
+      }
     }
-    else if(humidity > 20 && temperature > 22){
-      t = 'savana';
+    else if(zone == 'midsouth'){
+      if(humidity < 60 || temperature > 20){
+        t = 'savana';
+      }
+      else if(humidity > 80 && temperature > 18){
+        t = 'wetland';
+      }
+      else if(humidity > 70 && temperature > 12){
+        t = 'forest';
+      }
+      else{
+        t = 'fields';
+      }
     }
-    else if(humidity > 20 && temperature < 0){
-      t = 'taigas';
-    }
-    else{
-      t = 'fields';
+    else if(zone == 'south'){
+      if(temperature > 20){
+        t = 'savana';
+      }
+      else if(temperature < 3){
+        t = 'taigas';
+      }
+      else if(humidity > 70 && temperature > 8){
+        t = 'forest';
+      }
+      else{
+        t = 'fields';
+      }
     }
   }
 
   return t;
 }
 
+function setRiver(hex, hexmap, terrain, humidity){
+  let river = 'no';
+  if(terrain == 'mountains' || terrain == 'hills'){
+    let random = Math.floor(Math.random()*100);
+    if(random < 33){
+      river = 'river';
+      let arrayHex = [];
+
+      if(numIsPair(hex.r)){
+        let hexL = hex.q > 0 ? hexmap.hexes[hex.n-1].type : 'water';
+        let hexR = hex.q < (sizeQ-1) ? hexmap.hexes[hex.n+1].type : 'water';
+        let hexUL = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ-1)].type : 'water';
+        let hexDL = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ+1)].type : 'water';
+        let hexUR = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ)].type : 'water';
+        let hexDR = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ)].type : 'water';
+        arrayHex.push(hexL, hexR, hexUL, hexDL, hexUR, hexDR);
+      }
+      else{
+        let hexL = hex.q > 0 ? hexmap.hexes[hex.n-1].type : 'water';
+        let hexR = hex.q < (sizeQ-1) ? hexmap.hexes[hex.n+1].type : 'water';
+        let hexUL = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ)].type : 'water';
+        let hexDL = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ)].type : 'water';
+        let hexUR = hex.r < (sizeR-1) ? hexmap.hexes[hex.n+(sizeQ+1)].type : 'water';
+        let hexDR = hex.r > 0 ? hexmap.hexes[hex.n-(sizeQ-1)].type : 'water';
+        arrayHex.push(hexL, hexR, hexUL, hexDL, hexUR, hexDR);
+      }
+
+      if(checkWater(arrayHex)){
+        return river;
+      }
+      else{
+        let distR = 0;
+        let distL = 0;
+        let distUL = 0;
+        let distDL = 0;
+        let distUR = 0;
+        let distDR = 0;
+        for(i = 0 ; i < (sizeQ - hex.q) ; i++){
+          if(hexmap.hexes[hex.n+i] && hexmap.hexes[hex.n+i].type != 'water'){
+            distR++;
+          }
+          else{
+            i = sizeQ-hex.q;
+          }
+        }
+        for(i = 0 ; i < hex.q ; i++){
+          if(hexmap.hexes[hex.n-i] && hexmap.hexes[hex.n-i].type != 'water'){
+            distL++;
+          }
+          else{
+            i = hex.q;
+          }
+        }
+        for(i = 0 ; i < (sizeR - hex.r) ; i++){
+          if(hexmap.hexes[hex.n+(i*sizeQ)] && hexmap.hexes[hex.n+(i*sizeQ)].type != 'water'){
+            distUL++;
+          }
+          else{
+            i = sizeR-hex.r;
+          }
+        }
+        for(i = 0 ; i < hex.r ; i++){
+          if(hexmap.hexes[hex.n-(i*sizeQ)] && hexmap.hexes[hex.n-(i*sizeQ)].type != 'water'){
+            distDL++;
+          }
+          else{
+            i = hex.r;
+          }
+        }
+        for(i = 0 ; i < (sizeR - hex.r) ; i++){
+          if(hexmap.hexes[hex.n+(i*sizeQ+1)] && hexmap.hexes[hex.n+(i*sizeQ+1)].type != 'water'){
+            distUR++;
+          }
+          else{
+            i = sizeR-hex.r;
+          }
+        }
+        for(i = 0 ; i < hex.r ; i++){
+          if(hexmap.hexes[hex.n-(i*sizeQ-1)] && hexmap.hexes[hex.n-(i*sizeQ-1)].type != 'water'){
+            distDR++;
+          }
+          else{
+            i = hex.r;
+          }
+        }
+        let listDist = {right: distR, left: distL, upLeft: distUL, downLeft: distDL, upRight: distUR, downRight: distDR};
+        let min = 1000;
+        let key;
+        for(let i in listDist){
+          if(listDist[i] < min){
+            min = listDist[i];
+            key = i;
+          }
+        }
+        switch(key){
+          case 'right':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n+i].river = 'river';
+            }
+            break;
+          case 'left':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n-i].river = 'river';
+            }
+            break;
+          case 'upLeft':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n+(i*sizeQ)].river = 'river';
+            }
+            break;
+          case 'downLeft':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n-(i*sizeQ)].river = 'river';
+            }
+            break;
+          case 'upRight':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n+(i*sizeQ+1)].river = 'river';
+            }
+            break;
+          case 'downRight':
+            for(i = 0 ; i < min ; i++){
+              hexmap.hexes[hex.n-(i*sizeQ+1)].river = 'river';
+            }
+            break;
+        }
+        return river;
+      }
+      return river;
+    }
+    return river;
+  }
+  return river;
+}
+
 function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
-  let rainZones = setZonesRain(sizeQ, sizeR);
-  let windZones = setZonesWind(sizeQ, sizeR);
-  let sunZones = setZonesSun(sizeQ, sizeR);
+  let rainZones = setZonesRain(hexmap, sizeQ, sizeR);
+  let windZones = setZonesWind(hexmap, sizeQ, sizeR);
+  let sunZones = setZonesSun(hexmap, sizeQ, sizeR);
+  let hexes = {};
   hexmap.setContent(function(id,hex){
-    hex.explore = 'secret';
-    setElevation(hexmap, hex, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
-    setZones(hex, sizeR);
-    hex.rain = 0;
-    hex.wind = 0;
-    hex.sun = 0;
-    setRain(hex, rainZones);
-    setWind(hex, windZones);
-    setSun(hex, sunZones);
-    let h = setHumidity(hex.wind, hex.rain, hex.sun, hex.zone, hex.elevation);
-    hex.humidity = h;
-    let temp = setTemperature(hex.elevation, hex.humidity, hex.zone);
-    hex.temp = temp;
-    let t = setTerrain(hex.elevation, hex.humidity, hex.temp);
-    hex.terrain = t;
-    hex.setClass(hex.explore);
+    if(hex.type == 'land'){
+      hex.explore = 'secret';
+      hex.leader = 'none';
+      setElevation(hexmap, hex, sizeQ, sizeR);
+      setZones(hex, sizeR);
+      setRain(hexmap, sizeQ, hex, rainZones);
+      setWind(hexmap, sizeQ, hex, windZones);
+      setSun(hexmap, sizeQ, hex, windZones);
+      let h = setHumidity(hex.wind, hex.rain, hex.sun, hex.zone, hex.elevation);
+      hex.humidity = h;
+      let temp = setTemperature(hex.elevation, hex.humidity, hex.zone, hex.wind, hex.sun, hex.rain);
+      hex.temp = temp;
+      let t = setTerrain(hex.elevation, hex.humidity, hex.temp, hex.zone);
+      hex.terrain = t;
+      //let river = setRiver(hex, hexmap, hex.terrain, hex.humidity);
+      //hex.river = river;
+      hex.setClass(hex.terrain);
 
-    // Build the circular token that sits on a hex
-    str = '<div class="token">';
-    str += '<div class="explorer">'+'Explorer'+'</div>';
-    //str += '<div class="explorer">'+hex.n+'</div>';
-    //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
-    //str += '<div class="terrain">'+hex.type+'</div>';
-    //str += '<div class="hauteur">'+hex.elevation+'</div>';
-    //str += '<div class="hauteur">'+hex.humidity+'</div>';
-    //str += '<div class="hauteur">'+hex.temp+'</div>';
-    str += '</div>';
+      // Build the circular token that sits on a hex
+      str = '<div class="token">';
+      //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
+      //str += '<div class="id">'+hex.river+'</div>';
+      str += '</div>';
 
-    return str;
+      return str;
+    }
+    else{
+      hex.setClass('water');
+
+      return '';
+    }
   });
 }
