@@ -5,15 +5,28 @@
     <script type="text/javascript" src="https://slowe.github.io/stuquery/js/stuquery.js"></script>
     <script type="text/javascript" src="https://slowe.github.io/stuquery/js/stuquery.hexmap.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
     <script type="text/javascript" src="mapgen.js"></script>
     <script type="text/javascript" src="mapclass.js"></script>
-    <script type="text/javascript" src="server.js"></script>
+    <script type = "text/javascript">
+function myAjax () {
+$.ajax( { type : 'POST',
+          data : {'action': JSON.stringify(hexmap) },
+          url  : 'sendHexmap.php',
+          success: function ( data ) {
+            alert( data );
+          },
+          error: function ( xhr ) {
+            alert( "error" );
+          }
+        });
+}
+    </script>
     <link rel="stylesheet" href="stuquery.hexmap.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="hexmap-8" class="ex-8">
+      <button onclick="myAjax()">Send hello to server</button>
       <div class="terrains">Terrains</div>
       <div class="politique">Politique</div>
       <div class="exploration">Exploration</div>
@@ -28,8 +41,9 @@
   let sizeR = 30;
   let minAleaK = sizeQ/2-3;
   let maxAleaK = minAleaK+8;
-  let aleaK = Math.floor(Math.random()*8)+minAleaK;
-  let hexMapGenerated = generateHexMap(aleaK, sizeQ, sizeR);
+  let aleaK = Math.floor(Math.random()*6)+12;
+  let aleaJ = 8;
+  let hexMapGenerated = generateHexMap(aleaK, sizeQ, sizeR, aleaJ);
   let placeHexmap = document.querySelector('code');
   placeHexmap.append(hexMapGenerated);
   let hexmap = S.hexmap('hexmap-8');
@@ -38,27 +52,52 @@
     hexmap.positionHexes().resize();
 
     setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK);
-
-    editHexmap(hexmap);
   });
+
+  S('.politique').on('click', function(){
+    mode = 'politique';
+    for(i = 0 ; i < hexmap.hexes.length ; i++){
+      if(hexmap.hexes[i].type != 'water' && hexmap.hexes[i].leader && hexmap.hexes[i].explore == 'explored'){
+        //console.log(document.querySelector('[data-id="' + hexmap.hexes[i].n + '"]'));
+        document.querySelector('[data-id="' + hexmap.hexes[i].n + '"]').children[0].classList = 'hexinner ' + hexmap.hexes[i].leader + ' ' + hexmap.hexes[i].terrain;
+      }
+    }
+  });
+
+  S('.terrains').on('click', function(){
+    mode = 'terrains';
+    hexmap.setClass(function(id,hex){
+      if(hex.type != 'water' && hex.explore == 'explored'){
+        return hex.terrain;
+      }
+      else if(hex.explore == 'secret'){
+        return hex.explore;
+      }
+      else{
+        return 'water';
+      }
+    });
+  });
+
+  S('.exploration').on('click', function(){
+    mode = 'exploration';
+    hexmap.setClass(function(id,hex){
+      if(hex.type != 'water' && hex.explore == 'explored'){
+        return hex.terrain;
+      }
+      else if(hex.explore == 'secret'){
+        return hex.explore;
+      }
+      else{
+        return 'water';
+      }
+    });
+  })
 
   hexmap.on('click', function(e){
-    hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
-    hexmap.hexes[e.hex.id].explore = 'explored';
-    console.log(hexmap.hexes[e.hex.id]);
-    hexmap.setContent(function(id,hex) {
-      if(hex.explore == 'explored')
-      {
-        str = '';
-      }
-      else
-      {
-        str = '<div class="token">';
-        str += '<div class="explorer">'+'Explorer'+'</div>';
-        str += '</div>';
-      }
-    return str;
-    editHexmap(hexmap);
+    if(mode == 'exploration' && hexmap.hexes[e.hex.id].explore == 'secret'){
+      hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
+      hexmap.hexes[e.hex.id].explore = 'explored';
+    }
   });
-});
 </script>
