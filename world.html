@@ -108,7 +108,6 @@ $.getJSON("hexmap.json", function(json) {
         hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
         hexmap.hexes[e.hex.id].explore = 'explored';
         items.push(hexmap);
-        make_list();
         save_to_local_json();
       }
     });
