@@ -801,14 +801,14 @@ function setHexMap(hexmap, aleaK, sizeQ, sizeR, minAleaK, maxAleaK) {
       hex.temp = temp;
       let t = setTerrain(hex.elevation, hex.humidity, hex.temp, hex.zone);
       hex.terrain = t;
-      //let river = setRiver(hex, hexmap, hex.terrain, hex.humidity);
-      //hex.river = river;
+      let river = setRiver(hex, hexmap, hex.terrain, hex.humidity);
+      hex.river = river;
       hex.setClass(hex.terrain);
 
       // Build the circular token that sits on a hex
       str = '<div class="token">';
       //str += '<div class="id">'+' '+hex.q+','+hex.r+'</div>';
-      //str += '<div class="id">'+hex.river+'</div>';
+      str += '<div class="id">'+hex.river+'</div>';
       str += '</div>';
 
       return str;
