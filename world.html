@@ -43,6 +43,25 @@ $.getJSON("hexmap.json", function(json) {
       }
     })
     let mode = 'terrains';
+    let items;
+
+    function save_to_local_json() {
+      let items_json = JSON.stringify(items);
+      localStorage.setItem('hexmap', items_json);
+    };
+
+
+    function read_from_local_json() {
+      let items_json = localStorage.getItem('hexmap');
+      items = JSON.parse(items_json);
+
+      // If the file is empty
+      if (!items) {
+        items = [];
+      }
+    };
+
+    read_from_local_json();
 
     S('.politique').on('click', function(){
       mode = 'politique';
@@ -88,6 +107,9 @@ $.getJSON("hexmap.json", function(json) {
       if(mode == 'exploration' && hexmap.hexes[e.hex.id].explore == 'secret'){
         hexmap.hexes[e.hex.id].setClass(hexmap.hexes[e.hex.id].terrain);
         hexmap.hexes[e.hex.id].explore = 'explored';
+        items.push(hexmap);
+        make_list();
+        save_to_local_json();
       }
     });
   });
