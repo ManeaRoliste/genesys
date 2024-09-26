@@ -11,23 +11,46 @@
     font-family: serif;
     border-radius: 100%;
     background-color: wheat;
-    width: 4em;
-    height: 4em;
+    width: 5em;
+    height: 5em;
     color: black;
-    display: table-cell;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(1%, auto);
     vertical-align: middle;
   }
-  .token .id, .token .odds { font-size: 2em; }
-  .egypte {
+  .id { font-size: 3em; }
+  .river { font-size: 2em; grid-column: 1/3;}
+  .tok {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(10%, auto);
+  }
+  .alim { font-size: 1.5em; grid-column: 1; grid-row: 1; padding-left: 10px; padding-top: 10px; }
+  .arti { font-size: 1.5em; grid-column: 3; grid-row: 1; padding-right: 15px; padding-top: 10px; }
+  .lux { font-size: 1.5em; grid-column: 1; grid-row: 4; padding-left: 10px; padding-bottom: 10px; }
+  .fer { font-size: 1.5em; grid-column: 2; grid-row: 1; }
+  .mar { font-size: 1.5em; grid-column: 2; grid-row: 2; }
+  .epi { font-size: 1.5em; grid-column: 2; grid-row: 3; }
+  .rar { font-size: 1.5em; grid-column: 2; grid-row: 4; }
+  .hide { color: transparent; user-select: none; }
+  .test {
     box-shadow: inset 0 0 0 2000px rgba(245, 230, 39, 0.4);
   }
-  .hills { background-image: url('tiles/hills.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .taigas { background-image: url('tiles/taigas.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .mountains { background-image: url('tiles/mountains.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .fields { background-image: url('tiles/fields.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .forest { background-image: url('tiles/forest.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .wetland { background-image: url('tiles/wetland.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
-  .savana { background-image: url('tiles/savana.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .Mélenchonisme {
+    box-shadow: inset 0 0 0 2000px rgba(255, 0, 0, 0.4);
+  }
+  .Bachoran {
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
+  }
+  .hills { background-image: url('https://zupimages.net/up/24/38/69gv.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .taigas { background-image: url('https://zupimages.net/up/24/38/7h84.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .mountains { background-image: url('https://zupimages.net/up/24/38/jtbb.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .fields { background-image: url('https://zupimages.net/up/24/38/mdan.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .forest { background-image: url('https://zupimages.net/up/24/38/6eyc.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .wetland { background-image: url('https://zupimages.net/up/24/38/0cmg.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
+  .savana { background-image: url('https://zupimages.net/up/24/38/x92q.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
   .secret {background-color: #707070;}
   .water {background-color: #66bbe2;}
   .blockCiv {
@@ -42,4 +65,23 @@
     border-radius: 33%;
     background-color: #bbb4b4;
     color: black;
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, rgb(204, 0, 0), rgba(102, 187, 226, 1));
+    padding: 0.8%;
+    color: white;
+  }
+  .filter{
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+  }
+  .filter:hover{
+    outline:1px solid white;
+  }
+  .active{
+    outline:1px solid black;
   }
