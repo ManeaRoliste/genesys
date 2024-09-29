@@ -53,6 +53,12 @@
   .Abartha {
     box-shadow: inset 0 0 0 2000px rgba(184, 18, 3, 0.4);
   }
+  .Ulwandle {
+    box-shadow: inset 0 0 0 2000px rgba(77, 166, 255, 0.4);
+  }
+  .Nuadhs {
+    box-shadow: inset 0 0 0 2000px rgba(204, 102, 204, 0.4);
+  }
   .hills { background-image: url('https://zupimages.net/up/24/38/69gv.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
   .taigas { background-image: url('https://zupimages.net/up/24/38/7h84.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
   .mountains { background-image: url('https://zupimages.net/up/24/38/jtbb.png'); background-repeat: no-repeat; background-size: contain; z-index: 1;}
